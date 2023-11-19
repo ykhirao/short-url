@@ -1,0 +1,53 @@
+
+### 変数の埋め込み
+@project_id =
+@local_token =
+@production_token =
+@local_url = http://127.0.0.1:5002
+@production_url = https://{{project_id}}.web.app
+
+#############################################
+### 本番
+#############################################
+
+### ユーザーの初期化
+GET {{production_url}}/s/users/init
+
+### コンテンツ作成
+POST {{production_url}}/s/links
+Content-Type: application/json
+Authorization: Bearer {{production_token}}
+
+{
+    "id": "5",
+    "url": "https://www.google.com/",
+    "ogps": [
+        "<meta property='og:url' content=' ページの URL' />",
+        "<meta property='og:type' content='website' />",
+        "<meta property='og:title' content='我々のWebサイトです' />",
+        "<meta property='og:description' content='我々のWebサイトです' />",
+        "<meta property='og:site_name' content='我々のWebサイト' />",
+        "<meta property='og:image' content='https://imgur.com/6xGMXaM.jpg' />"
+    ]
+}
+
+### 実際のHTML確認
+# ブラウザで確かめるとリダイレクトされてしまうので、htmlとして取得する
+GET {{production_url}}/s/3
+
+#############################################
+### ローカル
+#############################################
+
+### ユーザーの初期化
+GET {{local_url}}/s/users/init
+
+### コンテンツ生成
+POST {{local_url}}/s/links
+Content-Type: application/json
+Authorization: Bearer {{local_token}}
+
+{
+    "id": "5",
+    "url": "https://www.google.com/"
+}
