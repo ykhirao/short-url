@@ -6,8 +6,21 @@ Firebase, Firestore, Cloud Functions, Node.js, TypeScript, JavaScript, HTTPな�
 
 ## 使い方
 
+Firebaseのプロジェクトを事前に作成し、料金プランを Blaze にしてください。
+
 ```bash
-# 複数ターミナルで以下、同時起動する
+
+```basha
+# firebaseを追加
+$ firebase use --add
+
+$ cd functions
+$ npm ci
+
+# クラウドにデプロイする
+$ firebase deploy
+
+# ローカルで開発する場合複数ターミナルで以下を同時起動する
 $ firebase emulators:start
 $ npm run build:watch
 ```
@@ -16,6 +29,7 @@ $ npm run build:watch
 * Firestore, Hosting, Firestore も同時に立ち上がる(PortはEmulatorUI上で確認をする)
 * fireabase.jsonでhostiongのrewriteをfunctionsに向けたので以下URLが同じ動作すればOK
 * functions(http://127.0.0.1:5001/YOUR_PROJECT_ID/us-central1/s) → hosting(http://127.0.0.1:5002/s)
+* Firestoreはエミュレータ立ち上げるたびに初期化されるので .http ファイルなどで都度初期化を行う
 
 ## httpファイルの使い方
 
